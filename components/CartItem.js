@@ -12,9 +12,9 @@ export default function CartItem({ price, title, quantity, deleteItem, deletable
       </View>
       <View style={styles.rightItems}>
         <Text style={styles.title}>Total:${(price * quantity).toFixed(2)}</Text>
-       {deletable && <TouchableOpacity style={styles.deleteButton} onPress={deleteItem}>
-          <Ionicons name="md-trash" size={28} color={Platform.OS === 'android' ? 'red' : '#888'} />
-        </TouchableOpacity>}
+        <TouchableOpacity style={styles.deleteButton} onPress={deleteItem}>
+          <Ionicons name="md-trash" size={23} color={Platform.OS === 'android' ? 'red' : '#888'} />
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
   quantity:{
  
     color:'black',
-    fontSize:19,
+    fontSize:21,
     marginHorizontal:5
   },
   title:{

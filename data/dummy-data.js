@@ -44,7 +44,7 @@ const PRODUCTS = [
   new Product(
     'p6',
     'u1',
-    'Water Melon',
+    'W. Melon',
     'http://clipartmag.com/images/animated-watermelons-6.jpg',
     "Can be used for role-playing (not the kind of role-playing you're thinking about...).",
     3.39

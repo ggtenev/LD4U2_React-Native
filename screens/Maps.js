@@ -8,6 +8,8 @@ import {
   ScrollView,
   Dimensions,
   TouchableOpacity,
+  Platform,
+  
 } from "react-native";
 import MapView, { Marker } from "react-native-maps";
 import * as Location from "expo-location";
@@ -136,6 +138,15 @@ Maps.navigationOptions = ({ navigation }) => {
         </View>
       </TouchableOpacity>
     ),
+    headerLeft:() => (
+      <TouchableOpacity style={styles.menuBtn} onPress={() => navigation.toggleDrawer()}>
+        <Ionicons
+          name={Platform.OS === 'android' ? 'md-menu' : 'ios-menu'}
+          size={32}
+          color={Platform.OS === "android" ? "white" : "#888"}
+        />
+      </TouchableOpacity>
+    )
   };
 };
 
@@ -165,7 +176,7 @@ const styles = StyleSheet.create({
     borderColor: "grey",
   },
   basket:{
-    marginRight: 12,
+    marginRight: 10,
     flexDirection:'row',
   },
   nums: {
@@ -185,4 +196,7 @@ const styles = StyleSheet.create({
     alignItems:'center',
     justifyContent:'center'
   },
+  menuBtn:{
+    marginLeft:15
+  }
 });

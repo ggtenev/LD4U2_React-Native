@@ -1,11 +1,14 @@
 import React from "react";
 import { View, Text, FlatList, Button, StyleSheet } from "react-native";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import Colors from "../../constants/colors";
 import CartItem from '../../components/CartItem'
+import * as actions from '../../store/actions/cart'
+import * as orderActions from '../../store/actions/orders'
 
 export default function Cart({navigation}) {
   const cartTotalAmount = useSelector((state) => state.cart.totalAmount);
+  const dispatch = useDispatch()
   const cartItems = useSelector((state) => {
     const arrayItems = [];
     for (let key in state.cart.items) {
@@ -17,7 +20,7 @@ export default function Cart({navigation}) {
         quantity: state.cart.items[key].quantity,
       });
     }
-    return arrayItems
+    return arrayItems.sort((a,b) => a.id > b.id ? 1 : -1)
   });
   return (
     <View style={styles.container}>
@@ -30,16 +33,21 @@ export default function Cart({navigation}) {
       price={item.price} 
       quantity={item.quantity} 
       title={item.title}
-      // deleteItem = {() => dispatch(actions.removeFromCart(item.id))}
+      deleteItem = {() => dispatch(actions.removeFromCart(item.id))}
        />}
       />
       </View>
       <View style={styles.summary}>
         <Text style={styles.summaryText}>
           Total:{" "}
-          <Text style={styles.amount}>£{cartTotalAmount.toFixed(2)}</Text>
+          <Text style={styles.amount}>£ {Math.abs(cartTotalAmount.toFixed(2))}</Text>
         </Text>
-        <Button onPress={() => navigation.navigate('Checkout')} title='Check Out' color='orange' disabled={cartItems.length == 0 ? true:false} />
+        <Button onPress={() => {
+          dispatch(orderActions.addOrder(cartItems,cartTotalAmount))
+          navigation.navigate('Checkout')}}
+          title='Check Out' color='orange' disabled={cartItems.length == 0 ? true:false}
+          
+           />
       </View>
     </View>
   );
