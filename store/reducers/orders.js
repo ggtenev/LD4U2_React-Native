@@ -12,7 +12,7 @@ export default (state = initState, action) => {
       const newOrder = new Order(
         new Date().toString(),
         action.orderData.items,
-        action.orderData.sum,
+        action.orderData.totalAmount,
         new Date()
       );
       return {

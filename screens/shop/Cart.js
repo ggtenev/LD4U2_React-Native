@@ -29,7 +29,7 @@ export default function Cart({navigation}) {
         <FlatList 
       data={cartItems}
       renderItem={({item}) => <CartItem 
-      // deletable={true}
+      deletable={true}
       price={item.price} 
       quantity={item.quantity} 
       title={item.title}

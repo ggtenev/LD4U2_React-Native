@@ -5,6 +5,7 @@ import { createStackNavigator } from 'react-navigation-stack';
 import { Platform } from 'react-native'
 
 import { Ionicons } from "@expo/vector-icons";
+import { FontAwesome } from "@expo/vector-icons";
 
 import Colors from './constants/colors'
 import ProductsOverview from './screens/shop/ProductsOverview'
@@ -13,6 +14,7 @@ import Onboarding from './screens/Onboarding'
 import Cart from './screens/shop/Cart'
 import Checkout from './screens/Checkout'
 import Confirmation from './screens/Confirmation'
+import About from './screens/About'
 import Orders from './screens/shop/Orders'
 
 const defNavOptions = {
@@ -87,9 +89,23 @@ const OrdersNav = createStackNavigator({
   }
 })
 
+const AboutNav = createStackNavigator({
+  About:About,
+}, {
+  defaultNavigationOptions:defNavOptions,
+  navigationOptions:{
+    drawerIcon:drawerConfig => <FontAwesome 
+    size={23} 
+    name='info-circle'
+    color={drawerConfig.tintColor}
+    />
+  }
+})
+
 const ShopNavigator = createDrawerNavigator({
   Home:SwitchNav,
-  Orders:OrdersNav
+  Orders:OrdersNav,
+  About:AboutNav
 }, {
   contentOptions:{
     activeTinitColor:Colors.primary

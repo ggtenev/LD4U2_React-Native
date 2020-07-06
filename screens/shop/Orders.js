@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { useSelector } from "react-redux";
+import OrderItem from '../../components/OrderItem'
 
 
 import { Ionicons } from "@expo/vector-icons";
@@ -18,7 +19,7 @@ export default function Order() {
     <FlatList
       data={orders}
       renderItem={({ item }) => {
-        return <Text>{item.totalAmount}</Text>;
+        return <OrderItem total={item.totalAmount} item={item} date={item.readableDate}/>;
       }}
     />
   );

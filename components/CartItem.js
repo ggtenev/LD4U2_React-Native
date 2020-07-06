@@ -12,9 +12,9 @@ export default function CartItem({ price, title, quantity, deleteItem, deletable
       </View>
       <View style={styles.rightItems}>
         <Text style={styles.title}>Total:${(price * quantity).toFixed(2)}</Text>
-        <TouchableOpacity style={styles.deleteButton} onPress={deleteItem}>
+        {deletable && <TouchableOpacity style={styles.deleteButton} onPress={deleteItem}>
           <Ionicons name="md-trash" size={23} color={Platform.OS === 'android' ? 'red' : '#888'} />
-        </TouchableOpacity>
+        </TouchableOpacity>}
       </View>
     </View>
   );

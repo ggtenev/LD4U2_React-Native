@@ -4,9 +4,11 @@ import {
   CreditCardInput,
   LiteCreditCardInput,
 } from "react-native-credit-card-input";
+import {useSelector, useDispatch} from 'react-redux'
 
 export default class Checkout extends Component {
   state = { useLiteCreditCardInput: false, sw:false };
+  
 
   toggleSwitch = () => this.setState({sw:!this.state.sw});
 
