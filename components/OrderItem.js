@@ -9,8 +9,8 @@ export default function OrderItem({ total, date, item,quantity,title }) {
   return (
     <View style={styles.card}>
       <View style={styles.summary}>
-        <Text style={styles.amount}>${total.toFixed(2)}</Text>
-        <Text style={styles.date}>{date}</Text>
+        <Text style={styles.amount}>Total : ${total.toFixed(2)}</Text>
+        {/* <Text style={styles.date}>{date}</Text> */}
       </View>
       <Button 
       title={showDetails ? 'Hide Details':'Show details'} 
@@ -39,16 +39,17 @@ const styles = StyleSheet.create({
   },
   summary:{
     flexDirection:'row',
-    justifyContent:'space-between',
+    justifyContent:'center',
     alignItems:'center',
     width:'100%',
-    margin:5
+    margin:5,
+    marginBottom:10
   },
   amount:{
     
   },
   date:{
-    fontSize:16,
-
+    fontSize:32,
+    textAlign:'center'
   }
 })

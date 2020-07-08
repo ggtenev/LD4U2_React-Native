@@ -16,6 +16,7 @@ import Checkout from './screens/Checkout'
 import Confirmation from './screens/Confirmation'
 import About from './screens/About'
 import Orders from './screens/shop/Orders'
+import AuthScreen from './screens/user/AuthScreen'
 
 const defNavOptions = {
   headerTitleAlign:'center',
@@ -56,6 +57,7 @@ const ProductsNav = createStackNavigator({
 })
 
 const SwitchNav = createSwitchNavigator({
+  Auth:AuthScreen,
   Onboarding:Onboarding,
   Products:ProductsNav,
   Confirmation:Confirmation
@@ -103,6 +105,7 @@ const AboutNav = createStackNavigator({
 })
 
 const ShopNavigator = createDrawerNavigator({
+  
   Home:SwitchNav,
   Orders:OrdersNav,
   About:AboutNav
