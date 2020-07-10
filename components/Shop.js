@@ -7,7 +7,7 @@ export default function Shop({img, title, description, navigation}) {
       <TouchableOpacity onPress={() => navigation.navigate('ProductsOverview')}>
       <Image style={styles.img} source={(img)} />
       <Text style={styles.title}>{title}</Text>
-      <Text style={styles.para}>Decription for store one Decription for store one</Text>
+      <Text style={styles.para}>Decription of the local store </Text>
       <Button title='Visit Store' color='green' onPress={() => navigation.navigate('ProductsOverview')}/>
       </TouchableOpacity>
      </View>
@@ -31,6 +31,6 @@ const styles = StyleSheet.create({
   },
   para:{
     textAlign:'center',
-    marginVertical:1
+    marginVertical:2
   }
 })

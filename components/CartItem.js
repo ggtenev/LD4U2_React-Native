@@ -7,11 +7,12 @@ export default function CartItem({ price, title, quantity, deleteItem, deletable
   return (
     <View style={styles.cart}>
       <View style={styles.info}>
-        <Text style={styles.quantity}>{quantity}</Text>
-        <Text style={styles.title}>{title}</Text>
+      <Text style={styles.title}>{title}</Text>
+        <Text style={styles.quantity}>   Qty: {quantity}</Text>
+        
       </View>
       <View style={styles.rightItems}>
-        <Text style={styles.title}>Total:${(price * quantity).toFixed(2)}</Text>
+        <Text style={styles.title}>Total:£{(price * quantity).toFixed(2)}</Text>
         {deletable && <TouchableOpacity style={styles.deleteButton} onPress={deleteItem}>
           <Ionicons name="md-trash" size={23} color={Platform.OS === 'android' ? 'red' : '#888'} />
         </TouchableOpacity>}
@@ -39,7 +40,7 @@ const styles = StyleSheet.create({
   quantity:{
  
     color:'black',
-    fontSize:21,
+    fontSize:16,
     marginHorizontal:5
   },
   title:{

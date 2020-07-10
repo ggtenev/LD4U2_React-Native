@@ -43,8 +43,8 @@ export default function Cart({navigation}) {
           <Text style={styles.amount}>£ {Math.abs(cartTotalAmount.toFixed(2))}</Text>
         </Text>
         <Button onPress={() => {
-          dispatch(orderActions.addOrder(cartItems,cartTotalAmount))
-          navigation.navigate('Checkout')}}
+          
+          navigation.navigate('Checkout',{makeOrder:() => dispatch(orderActions.addOrder(cartItems,cartTotalAmount))})}}
           title='Check Out' color='orange' disabled={cartItems.length == 0 ? true:false}
           
            />

@@ -1,12 +1,14 @@
 import Onboarding from 'react-native-onboarding-swiper';
 import { Image, View } from 'react-native';
 import React from 'react';
+import Colors from '../constants/colors'
 
 export default function Simple ({navigation})  {
   return  <Onboarding
   style={{ width:'90%', height:'100%'}}
   onDone={() => navigation.navigate('Maps')}
   showSkip={false}
+  bottomBarColor = {Colors.primary}
     pages={[
       {
         backgroundColor: '#fff',

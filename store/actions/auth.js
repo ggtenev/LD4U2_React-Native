@@ -1,5 +1,8 @@
+import {AsyncStorage} from 'react-native'
+
 export const SIGN_UP = 'SIGN_UP'
 export const SIGN_IN = 'SIGN_IN'
+export const LOGOUT = 'LOGOUT'
 
 export const signup = (email, password) => {
   return async dispatch => {
@@ -18,7 +21,7 @@ export const signup = (email, password) => {
       throw new Error('Something went wrong')
     }
     const resData = await response.json()
-    console.log(resData)
+ 
     dispatch({ type: SIGN_UP,token:resData.idToken, userId:resData.localId })
   }
 }
@@ -41,15 +44,21 @@ export const signIn = (email, password) => {
         let errorId = errorData.error.message
         let message = ''
         if(errorId === 'EMAIL_NOT_FOUND'){
-          message = 'Check if your email is correct'
+          message = 'Incorrect email address'
         } else if(errorId === 'INVALID_PASSWORD'){
-          message = 'Check if your ppassword is correct'
+          message = 'Incorrect password'
         }
         throw new Error(message)
       }
       const resData = await response.json()
-      console.log(resData)
+      
 
     dispatch({ type: SIGN_IN, token:resData.idToken, userId:resData.localId})
   }
+}
+
+export const logOut = () => {
+
+  return {type:LOGOUT}
+
 }

@@ -3,9 +3,11 @@ export const SET_ORDERS = "SET_ORDERS";
 import Order from "../../model/order";
 
 export const fetchOrders = () => {
-  return async (dispatch) => {
+  return async (dispatch, getState) => {
+    const token = getState().auth.token
+    const userId = getState().auth.userId
     const response = await fetch(
-      "https://ld4u-860ba.firebaseio.com/orders.json"
+      `https://ld4u-860ba.firebaseio.com/orders/${userId}.json`
     );
 
     const resData = await response.json();
@@ -28,11 +30,14 @@ export const fetchOrders = () => {
 };
 
 export const addOrder = (cartItems, totalAmount) => {
-  return async (dispatch) => {
+  return async (dispatch, getState) => {
+    const token = getState().auth.token
+    const userId = getState().auth.userId
+    
     //async code DB communication
     try {
       const response = await fetch(
-        "https://ld4u-860ba.firebaseio.com/orders.json",
+        `https://ld4u-860ba.firebaseio.com/orders/${userId}.json?auth=${token}`,
         {
           method: "POST",
           headers: {

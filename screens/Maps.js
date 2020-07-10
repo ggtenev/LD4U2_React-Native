@@ -102,15 +102,15 @@ export default function Maps({ navigation }) {
       <View style={styles.shops}>
         <ScrollView horizontal={true}>
           <View style={styles.shop}>
-            <Shop img={shop1} title='Tesco' navigation={navigation} />
+            <Shop img={shop1} title="John's Local" navigation={navigation} />
           </View>
           <View style={styles.shop}>
-            <Shop img={shop2} title='ASDA' navigation={navigation} />
+            <Shop img={shop2} title='SK Foods' navigation={navigation} />
           </View>
           <View style={styles.shop}>
             <Shop
               img={shop3}
-              title="Sainsbury's"
+              title="Barry's Food"
               navigation={navigation}
             />
           </View>
