@@ -31,13 +31,11 @@ export default function Maps({ navigation }) {
   const [cartNum, setCartNum] = useState(0)
   
   const cartItems = useSelector(state => state.cart.items)
-  // useEffect(() => {
-  //   setCartItems(useSelector(state => Object.keys(state.cart.items).length)) 
-  //   navigation.setParams({cartItems})
-  // },[cartItems])
-
+ 
+  //Setting the state of the screen initially after it's built
   useEffect(() => {
   
+    //Setting cart items
     let numCart = 0;
     for(let key in cartItems){
      numCart += cartItems[key].quantity
@@ -45,6 +43,7 @@ export default function Maps({ navigation }) {
     setCartNum(numCart)
     navigation.setParams({cartItems:numCart});
 
+    //Asking user for location permissions
     (async () => {
       let { status } = await Location.requestPermissionsAsync();
       if (status !== "granted") {
@@ -61,6 +60,8 @@ export default function Maps({ navigation }) {
   } else if (location) {
     text = JSON.stringify(location);
   }
+
+  //Dsiplaying spinner if location hasn't been obtained yet
   if (!location)
     return (
       <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
@@ -83,6 +84,7 @@ export default function Maps({ navigation }) {
         />
       </View>
 
+      {/* Displaying the map */}
       <MapView
         style={styles.mapStyle}
         region={{
@@ -99,6 +101,8 @@ export default function Maps({ navigation }) {
           }}
         />
       </MapView>
+
+      {/* Shops */}
       <View style={styles.shops}>
         <ScrollView horizontal={true}>
           <View style={styles.shop}>
@@ -120,6 +124,7 @@ export default function Maps({ navigation }) {
   );
 }
 
+//Configuring the header bar
 Maps.navigationOptions = ({ navigation }) => {
   const cartItems = navigation.getParam('cartItems')
   return {

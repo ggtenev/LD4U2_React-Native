@@ -7,67 +7,74 @@ import {
   Text,
   TextInput,
   Picker,
-  Image
+  Image,
 } from "react-native";
 
 export default class Checkout extends Component {
+  //Component state
   state = {
     sw: false,
     year: "",
     month: "",
-    cardNumber:'',
-    cvv:'',
-    cardholderName:'',
-    errorMessage:''
+    cardNumber: "",
+    cvv: "",
+    cardholderName: "",
+    errorMessage: "",
   };
 
+  //Managing state for the Switch component
   toggleSwitch = () => this.setState({ sw: !this.state.sw });
 
   render() {
-    const makeOrder = this.props.navigation.getParam('makeOrder')
+    const makeOrder = this.props.navigation.getParam("makeOrder");
     return (
       <View style={s.container}>
-        <Text
-          style={{
-            textAlign: "center",
-            marginBottom: 15,
-            fontSize: 22,
-            fontWeight: "700",
-          }}
-        >
-          Payment Details
-        </Text>
-        <Image source={require('../assets/cards.png')}/>
-        <View style={{width:'90%'}}>
+        <Text style={s.paymentDetails}> Payment Details</Text>
+        <Image source={require("../assets/cards.png")} />
+        <View style={{ width: "90%" }}>
           <View style={s.pickerContainer}>
             <Text>Card number </Text>
-            <TextInput 
-            style={{...s.input, width:'70%'}}
-            placeholder=' 1234 5643 7655 9076'
-            onChangeText={(t) => this.setState({cardNumber:t})}
-            keyboardType='numeric'
-            maxLength={16}
+            <TextInput
+              style={{ ...s.input, width: "70%" }}
+              placeholder=' 1234 5643 7655 9076'
+              onChangeText={(t) => this.setState({ cardNumber: t })}
+              keyboardType='numeric'
+              maxLength={16}
             />
           </View>
           <View style={s.pickerContainer}>
             <Text>Expiry Date </Text>
+
+            {/* YEAR PICKER */}
             <Picker
               selectedValue={this.state.year}
-              style={{ height: 50, width: 100, borderWidth:1, borderColor:'grey' }}
+              style={{
+                height: 50,
+                width: 100,
+                borderWidth: 1,
+                borderColor: "grey",
+              }}
               onValueChange={(itemValue, itemIndex) =>
                 this.setState({ year: itemValue })
               }
             >
-              <Picker.Item label='2020' value='' />
-              <Picker.Item label='2021' value='' />
-              <Picker.Item label='2022' value='' />
-              <Picker.Item label='2023' value='' />
-              <Picker.Item label='2024' value='' />
-              <Picker.Item label='2025' value='' />
+              <Picker.Item label='2020' value='2020' />
+              <Picker.Item label='2021' value='2021' />
+              <Picker.Item label='2022' value='2022' />
+              <Picker.Item label='2023' value='2023' />
+              <Picker.Item label='2024' value='2024' />
+              <Picker.Item label='2025' value='2025' />
             </Picker>
+
+            {/* MONTH PICKER */}
             <Picker
               selectedValue={this.state.month}
-              style={{ height: 50, width: 122, borderColor:'grey',borderWidth:1 }}
+              style={{
+                height: 50,
+                width: 122,
+                borderColor: "grey",
+                borderWidth: 1,
+              }}
               onValueChange={(itemValue, itemIndex) =>
                 this.setState({ month: itemValue })
               }
@@ -88,22 +95,26 @@ export default class Checkout extends Component {
           </View>
           <View style={s.cvvContainer}>
             <Text>CVV</Text>
-            <TextInput placeholder='  e.g 356' style={s.cvv} 
-            onChangeText={(t) => this.setState({cvv:t})}
-            keyboardType='numeric'
-            maxLength={3}
+            <TextInput
+              placeholder='  e.g 356'
+              style={s.cvv}
+              onChangeText={(t) => this.setState({ cvv: t })}
+              keyboardType='numeric'
+              maxLength={3}
             />
           </View>
           <View style={s.pickerContainer}>
             <Text>Cardholder</Text>
-            <TextInput placeholder='  John Smith' style={s.cardholderInput}
-            onChangeText={(t) => this.setState({cardholderName:t})}
+            <TextInput
+              placeholder='  John Smith'
+              style={s.cardholderInput}
+              onChangeText={(t) => this.setState({ cardholderName: t })}
             />
           </View>
         </View>
         <View>
-            <Text style={s.errorMessage}>{this.state.errorMessage}</Text>
-          </View>
+          <Text style={s.errorMessage}>{this.state.errorMessage}</Text>
+        </View>
         <View style={s.subscription}>
           <Switch
             // style={{ transform: [{ scaleX: 1.4 }, { scaleY: 1.4 }] }}
@@ -113,27 +124,33 @@ export default class Checkout extends Component {
             trackColor={{ false: "#767577", true: "#05b41f" }}
             style={s.switch}
           />
-          
+
           <View>
-          <Text style={s.subMessage}>
-            Subscribe to out monthly plan of £4.99
-          </Text>
+            <Text style={s.subMessage}>
+              Subscribe to out monthly plan of £4.99
+            </Text>
           </View>
-          
         </View>
 
         <View style={s.btn}>
           <Button
-          disabled={!this.state.cardNumber.length || !this.state.cardholderName || !this.state.cvv }
+            disabled={
+              !this.state.cardNumber.length ||
+              !this.state.cardholderName ||
+              !this.state.cvv
+            }
             title='Finalize Order'
             color='green'
             onPress={() => {
-              if((this.state.cardNumber.length !== 16 ) || this.state.cvv.length !== 3) {
-                this.setState({errorMessage:'Please enter valid details'})
-                return
+              if (
+                this.state.cardNumber.length !== 16 ||
+                this.state.cvv.length !== 3
+              ) {
+                this.setState({ errorMessage: "Please enter valid details" });
+                return;
               }
-              makeOrder()
-              this.props.navigation.navigate("Confirmation")
+              makeOrder();
+              this.props.navigation.navigate("Confirmation");
             }}
           />
         </View>
@@ -153,8 +170,8 @@ const s = StyleSheet.create({
     borderRadius: 22,
     overflow: "hidden",
   },
-  errorMessage:{
-    color:'red'
+  errorMessage: {
+    color: "red",
   },
   t: {
     flex: 1,
@@ -181,7 +198,7 @@ const s = StyleSheet.create({
     // flexDirection: "column",
     backgroundColor: "#F5F5F5",
     marginTop: 40,
-    alignItems:'center'
+    alignItems: "center",
   },
   label: {
     color: "black",
@@ -194,8 +211,8 @@ const s = StyleSheet.create({
     borderColor: "grey",
     borderWidth: 1,
   },
-  cvv:{
-    width:'70%',
+  cvv: {
+    width: "70%",
     fontSize: 16,
     color: "black",
     padding: 2,
@@ -211,20 +228,25 @@ const s = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    marginVertical:10
+    marginVertical: 10,
   },
-  cvvContainer:{
+  cvvContainer: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    
   },
-  cardholderInput:{
+  cardholderInput: {
     fontSize: 16,
     color: "black",
     padding: 2,
     borderColor: "grey",
     borderWidth: 1,
-    width:'70%'
-  }
+    width: "70%",
+  },
+  paymentDetails: {
+    textAlign: "center",
+    marginBottom: 15,
+    fontSize: 22,
+    fontWeight: "700",
+  },
 });

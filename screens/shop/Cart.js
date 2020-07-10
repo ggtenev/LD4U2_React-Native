@@ -2,13 +2,17 @@ import React from "react";
 import { View, Text, FlatList, Button, StyleSheet } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import Colors from "../../constants/colors";
-import CartItem from '../../components/CartItem'
-import * as actions from '../../store/actions/cart'
-import * as orderActions from '../../store/actions/orders'
+import CartItem from "../../components/CartItem";
+import * as actions from "../../store/actions/cart";
+import * as orderActions from "../../store/actions/orders";
 
-export default function Cart({navigation}) {
+export default function Cart({ navigation }) {
+
+  //Fetching the total amout for the order from the store's state
   const cartTotalAmount = useSelector((state) => state.cart.totalAmount);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
+
+  //Converting cart items from an object into an array to enlist them later in the FlatList
   const cartItems = useSelector((state) => {
     const arrayItems = [];
     for (let key in state.cart.items) {
@@ -20,34 +24,46 @@ export default function Cart({navigation}) {
         quantity: state.cart.items[key].quantity,
       });
     }
-    return arrayItems.sort((a,b) => a.id > b.id ? 1 : -1)
+
+    //Sorting the items
+    return arrayItems.sort((a, b) => (a.id > b.id ? 1 : -1));
   });
   return (
     <View style={styles.container}>
       <View>
         <Text style={styles.title}>YOUR ITEMS</Text>
-        <FlatList 
-      data={cartItems}
-      renderItem={({item}) => <CartItem 
-      deletable={true}
-      price={item.price} 
-      quantity={item.quantity} 
-      title={item.title}
-      deleteItem = {() => dispatch(actions.removeFromCart(item.id))}
-       />}
-      />
+        <FlatList
+          data={cartItems}
+          renderItem={({ item }) => (
+            <CartItem
+              deletable={true}
+              price={item.price}
+              quantity={item.quantity}
+              title={item.title}
+              deleteItem={() => dispatch(actions.removeFromCart(item.id))}
+            />
+          )}
+        />
       </View>
       <View style={styles.summary}>
         <Text style={styles.summaryText}>
           Total:{" "}
-          <Text style={styles.amount}>£ {Math.abs(cartTotalAmount.toFixed(2))}</Text>
+          <Text style={styles.amount}>
+            £ {Math.abs(cartTotalAmount.toFixed(2))}
+          </Text>
         </Text>
-        <Button onPress={() => {
-          
-          navigation.navigate('Checkout',{makeOrder:() => dispatch(orderActions.addOrder(cartItems,cartTotalAmount))})}}
-          title='Check Out' color='orange' disabled={cartItems.length == 0 ? true:false}
-          
-           />
+        <Button
+          onPress={() => {
+            //Navigate away to the Checkout screen and sending makeOrder as a param
+            navigation.navigate("Checkout", {
+              makeOrder: () =>
+                dispatch(orderActions.addOrder(cartItems, cartTotalAmount)),
+            });
+          }}
+          title='Check Out'
+          color='orange'
+          disabled={cartItems.length == 0 ? true : false}
+        />
       </View>
     </View>
   );
@@ -79,10 +95,10 @@ const styles = StyleSheet.create({
     fontSize: 20,
     marginLeft: 5,
   },
-  title:{
+  title: {
     textAlign: "center",
     fontSize: 20,
     fontWeight: "700",
     marginVertical: 20,
-  }
+  },
 });

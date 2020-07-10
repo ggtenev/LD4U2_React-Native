@@ -1,28 +1,38 @@
-import React, {useState , useEffect} from "react";
-import { View, FlatList, Text, StyleSheet,TouchableOpacity } from "react-native";
+import React, { useState, useEffect } from "react";
+import {
+  View,
+  FlatList,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+} from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import Product from "../../components/Product";
-import { Ionicons } from '@expo/vector-icons';
+import { Ionicons } from "@expo/vector-icons";
 
-import * as cartActions from '../../store/actions/cart'
+import * as cartActions from "../../store/actions/cart";
 
-export default function ProductsOverview({navigation}) {
-  const [cartNum, setCartNum] = useState(0)
+export default function ProductsOverview({ navigation }) {
+  const [cartNum, setCartNum] = useState(0);
+
+  //Fetching data from Redux
   const products = useSelector((state) => state.products.availableProducts);
-  const cartItems = useSelector(state => state.cart.items)
-  const dispatch = useDispatch()
+  const cartItems = useSelector((state) => state.cart.items);
+  const dispatch = useDispatch();
 
+  //Setting the cart item in the header after the initial screen render
   useEffect(() => {
     let numCart = 0;
-    for(let key in cartItems){
-     numCart += cartItems[key].quantity
+    for (let key in cartItems) {
+      numCart += cartItems[key].quantity;
     }
-    setCartNum(numCart)
-    navigation.setParams({cartItems:numCart});
-  },[cartItems])
+    setCartNum(numCart);
+    navigation.setParams({ cartItems: numCart });
+  }, [cartItems]);
 
   return (
-    <View >
+    <View>
+      {/* Enlisting all products */}
       <FlatList
         data={products}
         keyExtractor={(item) => item.id}
@@ -32,7 +42,7 @@ export default function ProductsOverview({navigation}) {
             img={item.imageUrl}
             price={item.price}
             description={item.description}
-            addToCart ={() => dispatch(cartActions.addToCart(item))}
+            addToCart={() => dispatch(cartActions.addToCart(item))}
           />
         )}
       />
@@ -40,11 +50,12 @@ export default function ProductsOverview({navigation}) {
   );
 }
 
-ProductsOverview.navigationOptions = ({navigation}) => {
-  const cartItems = navigation.getParam('cartItems')
+//Configuring header
+ProductsOverview.navigationOptions = ({ navigation }) => {
+  const cartItems = navigation.getParam("cartItems");
   return {
-    title:'Products',
-    headerRight:() => (
+    title: "Products",
+    headerRight: () => (
       <TouchableOpacity
         style={styles.basket}
         onPress={() => navigation.navigate("Cart")}
@@ -54,37 +65,37 @@ ProductsOverview.navigationOptions = ({navigation}) => {
           size={32}
           color={Platform.OS === "android" ? "white" : "#888"}
         />
-      <View style={styles.num}>
+        <View style={styles.num}>
           <Text style={styles.nums}>{cartItems}</Text>
         </View>
       </TouchableOpacity>
-    )
-  }
-}
+    ),
+  };
+};
 
 const styles = StyleSheet.create({
   items: {
     alignItems: "center",
   },
-  basket:{
+  basket: {
     marginRight: 12,
-    flexDirection:'row',
+    flexDirection: "row",
   },
   nums: {
     fontSize: 16,
-    color:'white',
-    fontWeight:'800'
+    color: "white",
+    fontWeight: "800",
   },
   num: {
-    position:'relative',
-    right:6,
-    padding:5,
-    width:25,
-    height:25,
-    backgroundColor:'orange',
-    borderRadius:15,
+    position: "relative",
+    right: 6,
+    padding: 5,
+    width: 25,
+    height: 25,
+    backgroundColor: "orange",
+    borderRadius: 15,
     marginTop: 9,
-    alignItems:'center',
-    justifyContent:'center'
+    alignItems: "center",
+    justifyContent: "center",
   },
 });

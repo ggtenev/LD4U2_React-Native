@@ -1,3 +1,5 @@
+//ONBOARDING SCREENS
+
 import Onboarding from 'react-native-onboarding-swiper';
 import { Image, View } from 'react-native';
 import React from 'react';

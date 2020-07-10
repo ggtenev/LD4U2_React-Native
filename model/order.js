@@ -1,3 +1,5 @@
+//Structure of an order
+
 class Order{
   constructor(id, user,items, totalAmount, date){
     this.id= id;

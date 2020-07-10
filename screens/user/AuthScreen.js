@@ -17,7 +17,7 @@ import {
   TextInput,
   Text,
 } from "react-native";
-// import { useScreens } from 'react-native-screens';
+
 
 export default function AuthScreen({ navigation }) {
   const [loginMode, setLoginMode] = useState(true);
@@ -29,29 +29,22 @@ export default function AuthScreen({ navigation }) {
   const [error, setError] = useState("");
   const dispatch = useDispatch();
 
-  // useEffect(()=>{
-  //   if(error){
-  //     Alert.alert('Error has eccured','Something went wrong',[{text:'OK'}])
-  //   }
-  // },[error])
-
+ 
+  //Sign in method
   const signIn = async () => {
     setIsLoading(true);
     try {
       await dispatch(authActions.signIn(email, password));
       navigation.navigate("Onboarding");
 
-      // setIsLoading(false)
-      // setEmail('')
-      // setPassword('')
     } catch (err) {
       setError(err.message);
       console.log(error);
       setIsLoading(false);
     }
-    // setError(false)
   };
 
+  //Sign up method
   const signUp = async () => {
     setIsLoading(true);
     if(!firstName && !lastName) {
@@ -61,7 +54,6 @@ export default function AuthScreen({ navigation }) {
     }
     try {
       await dispatch(authActions.signup(email, password));
-
       setEmail("");
       setPassword("");
       navigation.navigate("Onboarding");
@@ -70,9 +62,9 @@ export default function AuthScreen({ navigation }) {
       console.log(err);
       setIsLoading(false);
     }
-    // setError(false)
   };
 
+  //Loading spinner while sending request to the server
   if (isLoading) {
     return (
       <View style={styles.activityIndicator}>
@@ -80,23 +72,23 @@ export default function AuthScreen({ navigation }) {
       </View>
     );
   }
+
+  //Returning sign in / sign up conditionally based on user's choice
   return loginMode ? (
     <KeyboardAvoidingView
       style={styles.screen}
       behavior='padding'
       keyboardVerticalOffset={44}
     >
-      {/* <LinearGradient colors={['blue','pink']}> */}
       <View style={styles.inputs}>
         <View style={{ alignItems: "center" }}>
-          {/* <Text style={{textAlign:'center', fontSize:24, fontWeight:'800', color:'green'}}>Welcome</Text> */}
           <Image
             style={{ height: 90, width: 90 }}
             source={require("../../assets/rec-logo-11.png")}
           />
         </View>
         <View>
-          {/* <Text>Email</Text> */}
+          {/*Email input field */}
           <TextInput
             style={styles.inputFiled}
             placeholder='Email'
@@ -109,7 +101,7 @@ export default function AuthScreen({ navigation }) {
           />
         </View>
         <View>
-          {/* <Text>Password</Text> */}
+          {/* Password input field */}
           <TextInput
             style={styles.inputFiled}
             placeholder='Password'
@@ -119,11 +111,10 @@ export default function AuthScreen({ navigation }) {
             value={password}
           />
         </View>
-
+         {/* Display error message if the user has not provided info in the input fields */}
         <View style={{ alignItems: "center" }}>
           <Text style={{ color: "red" }}>{error}</Text>
         </View>
-
         <View style={styles.buttons}>
           <View style={{ marginTop: 5, borderRadius: 15, overflow: "hidden" }}>
             <Button
@@ -158,14 +149,12 @@ export default function AuthScreen({ navigation }) {
     >
       <View style={styles.inputs}>
         <View style={{ alignItems: "center" }}>
-          {/* <Text style={{textAlign:'center', fontSize:18, color:'green'}}>Welcome</Text> */}
           <Image
             style={{ height: 90, width: 90 }}
             source={require("../../assets/rec-logo-11.png")}
           />
         </View>
         <View>
-          {/* <Text>Email</Text> */}
           <TextInput
             style={styles.inputFiled}
             placeholder='First Name'
@@ -221,6 +210,19 @@ export default function AuthScreen({ navigation }) {
               onPress={signUp}
             />
           </View>
+          <View style={{ alignItems: "center", marginTop: 3 }}>
+            <Text style={{ color: "grey" }}>Already have an account?</Text>
+          </View>
+          <View style={{ marginTop: 5, borderRadius: 15, overflow: "hidden" }}>
+            <Button
+              title='Log In'
+              color='#7cc930'
+              email
+              autoCapitalize='none'
+              required
+              onPress={() => setLoginMode(true) }
+            />
+          </View>
         </View>
       </View>
       {/* </LinearGradient> */}
@@ -228,6 +230,7 @@ export default function AuthScreen({ navigation }) {
   );
 }
 
+//STYLES
 const styles = StyleSheet.create({
   gradient: {
     // flex: 1,
@@ -240,22 +243,11 @@ const styles = StyleSheet.create({
     width: "82%",
     marginTop: "30%",
     padding: 25,
-    // flex:1,
     marginVertical:'10%'
-    // shadowColor: 'grey',
-    // shadowOffset: { width: 0, height: 2 },
-    // shadowRadius: 3,
-    // shadowOpacity: 0.1,
-    // elevation: 1,
-    // borderRadius: 2,
-    // height: 366,
-    // backgroundColor:'white'
   },
   screen: {
-    // flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    // backgroundColor:'green'
   },
   inputFiled: {
     borderBottomWidth: 0.7,

@@ -1,3 +1,5 @@
+//Defining thе structure of a cart item
+
 class CartItem{
   constructor(quantity, productPrice,productTitle, sum){
     this.quantity = quantity

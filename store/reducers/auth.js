@@ -1,9 +1,10 @@
-import { SIGN_IN, SIGN_UP, LOGOUT } from "../actions/auth"
+import { SIGN_IN, SIGN_UP, LOGOUT } from "../actions/auth";
 
+//Setting initial state
 const initState = {
   token: null,
-  userId: null
-}
+  userId: null,
+};
 
 // Handling authentication actions
 export default (state = initState, action) => {
@@ -11,15 +12,15 @@ export default (state = initState, action) => {
     case SIGN_IN:
       return {
         token: action.token,
-        userId: action.userId
-      }
+        userId: action.userId,
+      };
     case SIGN_UP:
       return {
         token: action.token,
-        userId: action.userId
-      }
+        userId: action.userId,
+      };
     case LOGOUT:
-      return initState
+      return initState;
   }
-  return state
-}
+  return state;
+};

@@ -1,55 +1,63 @@
-import React, {useState} from 'react';
-import { View, Text, StyleSheet, Button } from 'react-native';
-import CartItem from './CartItem'
-import Colors from '../constants/colors'
+import React, { useState } from "react";
+import { View, Text, StyleSheet, Button } from "react-native";
+import CartItem from "./CartItem";
+import Colors from "../constants/colors";
 
-export default function OrderItem({ total, date, item,quantity,title }) {
-
-  const [showDetails, setShowDetails] = useState(false)
+export default function OrderItem({ total, date, item, quantity, title }) {
+  const [showDetails, setShowDetails] = useState(false);
   return (
     <View style={styles.card}>
       <View style={styles.summary}>
         <Text style={styles.amount}>Total : ${total.toFixed(2)}</Text>
-        {/* <Text style={styles.date}>{date}</Text> */}
       </View>
-      <Button 
-      title={showDetails ? 'Hide Details':'Show details'} 
-      color={Colors.primary} 
-      onPress={() => setShowDetails(prev => !prev)}/>
-      {showDetails && <View>
-       {item.items.map(i => <CartItem key = {Math.random()} 
-       quantity= {i.quantity} total={i.sum} price = {i.price} title={i.title}/>)}
-        </View>}
+
+      {/* HIDE or SHOW conditinal render of content */}
+      <Button
+        title={showDetails ? "Hide Details" : "Show details"}
+        color={Colors.primary}
+        onPress={() => setShowDetails((prev) => !prev)}
+      />
+      {showDetails && (
+        <View>
+          {item.items.map((i) => (
+            <CartItem
+              key={Math.random()}
+              quantity={i.quantity}
+              total={i.sum}
+              price={i.price}
+              title={i.title}
+            />
+          ))}
+        </View>
+      )}
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  card:{
-    shadowColor: 'black',
+  card: {
+    shadowColor: "black",
     shadowOpacity: 0.3,
     shadowOffset: { width: 0, height: 2 },
     shadowRadius: 5,
     elevation: 4,
-    backgroundColor: 'white',
+    backgroundColor: "white",
     margin: 20,
     borderRadius: 10,
-    padding:15,
-    alignItems:'center'
+    padding: 15,
+    alignItems: "center",
   },
-  summary:{
-    flexDirection:'row',
-    justifyContent:'center',
-    alignItems:'center',
-    width:'100%',
-    margin:5,
-    marginBottom:10
+  summary: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    width: "100%",
+    margin: 5,
+    marginBottom: 10,
   },
-  amount:{
-    
+  amount: {},
+  date: {
+    fontSize: 32,
+    textAlign: "center",
   },
-  date:{
-    fontSize:32,
-    textAlign:'center'
-  }
-})
+});

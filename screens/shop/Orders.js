@@ -19,17 +19,18 @@ export default function Order() {
   const dispatch = useDispatch();
   useEffect(() => {
     setIsLoading(true);
-    try{
+
+    // Fetching orders from DB
+    try {
       dispatch(actions.fetchOrders()).then(() => setIsLoading(false));
-    } catch(err){
-      setError(err.message)
+    } catch (err) {
+      setError(err.message);
     }
-    
   }, []);
 
   const orders = useSelector((state) => state.orders.orders);
 
-  if(error){
+  if (error) {
     return (
       <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
         <Text>An error occured</Text>
@@ -37,7 +38,7 @@ export default function Order() {
     );
   }
 
-  //returns a loading component if the orders are not fetched
+  //Returns a loading component if the orders are not fetched
   if (isLoading) {
     return (
       <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
@@ -46,6 +47,7 @@ export default function Order() {
     );
   }
 
+  //Checking of any orders have been fetched from the server
   if (!isLoading && orders.length == 0) {
     return (
       <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
@@ -70,6 +72,7 @@ export default function Order() {
   );
 }
 
+//Header options
 Order.navigationOptions = ({ navigation }) => {
   return {
     headerTitle: "Your Orders",
