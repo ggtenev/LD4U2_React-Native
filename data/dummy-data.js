@@ -5,7 +5,7 @@ const PRODUCTS = [
     'p1',
     'u1',
     'Milk',
-    'https://www.outsideonline.com/sites/default/files/2017-07-24_parent/2017-07-24_92/soy-silk-milk_200x200_0.jpg',
+    'https://s.hdnux.com/photos/07/20/46/1902979/10/rawImage.jpg',
     'A red t-shirt, perfect for days with non-red weather.',
     0.99
   ),
@@ -13,7 +13,7 @@ const PRODUCTS = [
     'p2',
     'u1',
     'Eggs',
-    'https://belajarsebentar.files.wordpress.com/2016/05/telur-mata-sapi-200x200.jpg?w=1200',
+    'https://media.treehugger.com/assets/images/2018/04/white_eggs_in_carton.jpg.860x0_q70_crop-scale.jpg',
     'Fits your red shirt perfectly. To stand on. Not to wear it.',
     2.99
   ),
@@ -21,7 +21,7 @@ const PRODUCTS = [
     'p3',
     'u2',
     'Coffee',
-    'http://www.cocktailhunter.com/wp-content/uploads/2013/11/B-S-Mocha-Coffee-200x200.jpg',
+    'https://mir-s3-cdn-cf.behance.net/project_modules/1400/14032f31421011.5949505c9b06a.jpg',
     'Can also be used for tea!',
     8.99
   ),
@@ -29,7 +29,7 @@ const PRODUCTS = [
     'p4',
     'u3',
     'Salad ',
-    'https://whereismyspoon.co/wp-content/uploads/2017/09/tomato-rice-200x200.jpg',
+    'https://cdn.andnowuknow.com/thumbnails/chefsalads_story_061316.jpg',
     "What the content is? Why would that matter? It's a limited edition!",
     1.49
   ),
@@ -37,7 +37,7 @@ const PRODUCTS = [
     'p5',
     'u3',
     'Soda',
-    'https://wheretovegan.co.uk/wp-content/uploads/2019/10/4005501-200x200.png',
+    'https://static.planetminecraft.com/files/resource_media/screenshot/1320/sodas1_5502528_lrg.jpg',
     'Awesome hardware, crappy keyboard and a hefty price. Buy now before a new one is released!',
     0.89
   ),
@@ -45,7 +45,7 @@ const PRODUCTS = [
     'p6',
     'u1',
     'W. Melon',
-    'http://clipartmag.com/images/animated-watermelons-6.jpg',
+    'https://3.bp.blogspot.com/-cnPPRsbumPs/TgFDtj_x-jI/AAAAAAAAIdg/CFJxQ8EtSLI/s1600/watermelon-853.jpg',
     "Can be used for role-playing (not the kind of role-playing you're thinking about...).",
     3.39
   )

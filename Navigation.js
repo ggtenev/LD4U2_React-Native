@@ -25,11 +25,14 @@ import AuthScreen from "./screens/user/AuthScreen";
 import * as authActions from "./store/actions/auth";
 import { useDispatch } from "react-redux";
 
+
+
 // Basic header options to be used across all the screens
 const defNavOptions = {
   headerTitleAlign: "center",
   headerStyle: {
     backgroundColor: Colors.primary,
+    height:Platform.OS === 'android' ? 60 : 90
   },
   headerTintColor: "white",
 };
@@ -43,7 +46,7 @@ const ProductsNav = createStackNavigator(
         title: "Pick your store",
         headerTintColor: "white",
         headerStyle: {
-          // height:0
+          height:Platform.OS === 'android' ? 60 : 90,
           backgroundColor: Colors.primary,
         },
       },
