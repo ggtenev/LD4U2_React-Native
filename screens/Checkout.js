@@ -8,7 +8,11 @@ import {
   TextInput,
   Picker,
   Image,
+  Platform,
+  DatePickerIOS,
+  ScrollView
 } from "react-native";
+import DateTimePicker from "@react-native-community/datetimepicker";
 
 export default class Checkout extends Component {
   //Component state
@@ -20,15 +24,36 @@ export default class Checkout extends Component {
     cvv: "",
     cardholderName: "",
     errorMessage: "",
+    date: new Date(1598051730000),
   };
 
   //Managing state for the Switch component
   toggleSwitch = () => this.setState({ sw: !this.state.sw });
 
+  onChange = (event, selectedDate) => {
+    const currentDate = selectedDate || date;
+    this.setState({ show: Platform.OS === "ios" });
+    this.setState({ date: currentDate });
+  };
+
+  showMode = (currentMode) => {
+    this.setState({ show: Platform.OS === "ios" });
+    this.setState({ mode: currentMode });
+  };
+
+  showDatepicker = () => {
+    this.showMode("date");
+  };
+
+  showTimepicker = () => {
+    this.showMode("time");
+  };
+
   render() {
     const makeOrder = this.props.navigation.getParam("makeOrder");
     return (
-      <View style={s.container}>
+      <ScrollView >
+        <View style={s.container}>
         <Text style={s.paymentDetails}> Payment Details</Text>
         <Image source={require("../assets/cards.png")} />
         <View style={{ width: "90%" }}>
@@ -44,16 +69,12 @@ export default class Checkout extends Component {
           </View>
           <View style={s.pickerContainer}>
             <Text>Expiry Date </Text>
+            
 
-            {/* YEAR PICKER */}
+           
             <Picker
               selectedValue={this.state.year}
-              style={{
-                height: 50,
-                width: 100,
-                borderWidth: 1,
-                borderColor: "grey",
-              }}
+              style={s.individualPicker}
               onValueChange={(itemValue, itemIndex) =>
                 this.setState({ year: itemValue })
               }
@@ -66,15 +87,10 @@ export default class Checkout extends Component {
               <Picker.Item label='2025' value='2025' />
             </Picker>
 
-            {/* MONTH PICKER */}
+        
             <Picker
               selectedValue={this.state.month}
-              style={{
-                height: 50,
-                width: 122,
-                borderColor: "grey",
-                borderWidth: 1,
-              }}
+              style={s.individualPicker}
               onValueChange={(itemValue, itemIndex) =>
                 this.setState({ month: itemValue })
               }
@@ -106,7 +122,7 @@ export default class Checkout extends Component {
           <View style={s.pickerContainer}>
             <Text>Cardholder</Text>
             <TextInput
-              placeholder='  John Smith'
+              placeholder={Platform.OS === "android" ? "  John Smith" : ""}
               style={s.cardholderInput}
               onChangeText={(t) => this.setState({ cardholderName: t })}
             />
@@ -154,7 +170,8 @@ export default class Checkout extends Component {
             }}
           />
         </View>
-      </View>
+        </View>
+      </ScrollView>
     );
   }
 }
@@ -181,6 +198,13 @@ const s = StyleSheet.create({
     fontWeight: "700",
     fontSize: 14,
   },
+  individualPicker:{
+    height: Platform.OS === 'android' ? 50 : null,
+    width: 100,
+    borderWidth: Platform.OS === 'android' ? 1 : 0,
+    borderColor: "grey",
+
+  },
   switch: {
     transform: [{ scaleX: 1.4 }, { scaleY: 1.4 }],
     alignSelf: "flex-start",
@@ -199,6 +223,7 @@ const s = StyleSheet.create({
     backgroundColor: "#F5F5F5",
     marginTop: 40,
     alignItems: "center",
+    padding:10
   },
   label: {
     color: "black",

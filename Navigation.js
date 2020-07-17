@@ -32,7 +32,7 @@ const defNavOptions = {
   headerTitleAlign: "center",
   headerStyle: {
     backgroundColor: Colors.primary,
-    height:Platform.OS === 'android' ? 60 : 90
+    height:Platform.OS === 'android' ? 60 : 70
   },
   headerTintColor: "white",
 };

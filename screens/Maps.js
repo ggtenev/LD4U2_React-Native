@@ -136,7 +136,7 @@ Maps.navigationOptions = ({ navigation }) => {
         <Ionicons
           name='md-cart'
           size={32}
-          color={Platform.OS === "android" ? "white" : "#888"}
+          color={Platform.OS === "android" ? "white" : "#f2f2fc"}
         />
       <View style={styles.num}>
           <Text style={styles.nums}>{cartItems}</Text>
@@ -148,7 +148,7 @@ Maps.navigationOptions = ({ navigation }) => {
         <Ionicons
           name={Platform.OS === 'android' ? 'md-menu' : 'ios-menu'}
           size={32}
-          color={Platform.OS === "android" ? "white" : "#888"}
+          color={Platform.OS === "android" ? "white" : "white"}
         />
       </TouchableOpacity>
     )
@@ -162,7 +162,8 @@ const styles = StyleSheet.create({
   },
   mapStyle: {
     width: "100%",
-    height: screenHeight * 0.4,
+    height: Platform.OS === 'ios' ? screenHeight * 0.46 : screenHeight * 0.4 ,
+    // marginBottom:Platform.OS === 'ios' ? 30 : 0
   },
   shops:{
     height:screenHeight * 0.6,
