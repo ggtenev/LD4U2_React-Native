@@ -1,3 +1,5 @@
+// ABOUT SCREEN FROM THE DRAWER NAVIGATION
+
 import React from "react";
 import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
@@ -17,6 +19,7 @@ export default function About() {
   );
 }
 
+//NAVIGATION OPTIONS
 About.navigationOptions = ({ navigation }) => {
   return {
     headerLeft: () => (

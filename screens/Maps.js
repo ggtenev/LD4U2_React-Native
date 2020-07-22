@@ -1,3 +1,5 @@
+//HOME SCREEN OF THE APP
+
 import React, { useState, useEffect } from "react";
 import {
   View,
@@ -19,13 +21,18 @@ import {useSelector} from 'react-redux'
 
 import Shop from "../components/Shop";
 
+//IMPORTING THE ASSETS
 import shop1 from "../assets/banners/food1.jpg";
 import shop2 from "../assets/banners/food2.jpg";
 import shop3 from "../assets/banners/food3.jpg";
 
+
+//GETTING THE SCREENS HEIGHT
 let screenHeight = Dimensions.get("window").height;
 
 export default function Maps({ navigation }) {
+
+  //STATE OF THE SCREEN
   const [location, setLocation] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
   const [cartNum, setCartNum] = useState(0)

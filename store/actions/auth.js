@@ -1,14 +1,18 @@
+//REDUX ACTIONS FOR THE AUTHENTICATION FLOW
+
 import { AsyncStorage } from "react-native";
 
-//ACTIONS
+//ACTION CONSTANTS
 export const SIGN_UP = "SIGN_UP";
 export const SIGN_IN = "SIGN_IN";
 export const LOGOUT = "LOGOUT";
 
 export const signup = (email, password) => {
   
-  //Async DB communication
+  //ASYNC DATABASE COMMUNICATION
   return async (dispatch) => {
+
+    //SAVING THE RESPONSE FROM THE DB IN A VARIABLE
     const response = await fetch(
       "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyAMIY5-p6uJit99Mk-W3uARj2aSRliMucw",
       {
@@ -23,12 +27,14 @@ export const signup = (email, password) => {
         }),
       }
     );
+
+    //CHECKING IF THERE IS AN ERROR
     if (!response.ok) {
       throw new Error("Something went wrong");
     }
     const resData = await response.json();
 
-    //Dispatch action to te reducer
+    //IF ALL IS GOOD THE ACTION IS DISPATCHED TO THE REDUCER
     dispatch({
       type: SIGN_UP,
       token: resData.idToken,
@@ -36,8 +42,12 @@ export const signup = (email, password) => {
     });
   };
 };
+
+//SIGN IN ACTION
 export const signIn = (email, password) => {
   return async (dispatch) => {
+
+    //SAVING THE RESPONSE FROM THE DB IN A VARIABLE
     const response = await fetch(
       "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyAMIY5-p6uJit99Mk-W3uARj2aSRliMucw",
       {
@@ -67,6 +77,7 @@ export const signIn = (email, password) => {
     }
     const resData = await response.json();
 
+     //IF ALL IS GOOD THE ACTION IS DISPATCHED TO THE REDUCER
     dispatch({
       type: SIGN_IN,
       token: resData.idToken,
@@ -75,6 +86,7 @@ export const signIn = (email, password) => {
   };
 };
 
+//LOGOUT ACTION
 export const logOut = () => {
   return { type: LOGOUT };
 };

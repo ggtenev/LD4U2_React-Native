@@ -1,9 +1,13 @@
+//ORDER COMPONENT THAT WILL BE SHOWN IN THE "ORDERS" SCREEN
+
 import React, { useState } from "react";
 import { View, Text, StyleSheet, Button } from "react-native";
 import CartItem from "./CartItem";
 import Colors from "../constants/colors";
 
 export default function OrderItem({ total, date, item, quantity, title }) {
+  
+  //COMPONENT STATE FOR DISPLAYING/HIDING THE ORDER DETAILS
   const [showDetails, setShowDetails] = useState(false);
   return (
     <View style={styles.card}>
@@ -11,7 +15,7 @@ export default function OrderItem({ total, date, item, quantity, title }) {
         <Text style={styles.amount}>Total : ${total.toFixed(2)}</Text>
       </View>
 
-      {/* HIDE or SHOW conditinal render of content */}
+      {/* HIDE or SHOW conditinal rendering of content */}
       <Button
         title={showDetails ? "Hide Details" : "Show details"}
         color={Colors.primary}

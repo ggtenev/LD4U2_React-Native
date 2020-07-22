@@ -1,5 +1,6 @@
 //ONBOARDING SCREENS
 
+//IMPORTING THE DEPENDENCIES
 import Onboarding from 'react-native-onboarding-swiper';
 import { Image, View } from 'react-native';
 import React from 'react';
@@ -11,6 +12,8 @@ export default function Simple ({navigation})  {
   onDone={() => navigation.navigate('Maps')}
   showSkip={false}
   bottomBarColor = {Colors.primary}
+
+  //3 DIFFERENT ONBOARDING SCREENS
     pages={[
       {
         backgroundColor: '#fff',

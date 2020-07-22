@@ -1,4 +1,7 @@
+
 import Product from '../model/products';
+
+//CREATING AN ARRAY OF PRODUCTS THAT IS USED TO DISPLAY ALL AVAILABLE PRODUCTS IN THE STORE
 
 const PRODUCTS = [
   new Product(
@@ -51,4 +54,5 @@ const PRODUCTS = [
   )
 ];
 
+//EXPORTING THE PRODUUCTS ARRAY
 export default PRODUCTS;

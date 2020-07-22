@@ -1,4 +1,4 @@
-//CART ITEM COMPONENT
+//CART ITEM COMPONENT THAT WILL BE USED FOR DISPLAYING PODUCTS
 
 import React from 'react';
 import { View, StyleSheet, Text, Button, TouchableOpacity, Platform } from 'react-native';
@@ -11,8 +11,8 @@ export default function CartItem({ price, title, quantity, deleteItem, deletable
       <View style={styles.info}>
       <Text style={styles.title}>{title}</Text>
         <Text style={styles.quantity}>   Qty: {quantity}</Text>
-        
       </View>
+      {/* Displaying the price and delete button */}
       <View style={styles.rightItems}>
         <Text style={styles.title}>Total:£{(price * quantity).toFixed(2)}</Text>
         {deletable && <TouchableOpacity style={styles.deleteButton} onPress={deleteItem}>
@@ -30,8 +30,6 @@ const styles = StyleSheet.create({
     justifyContent:'space-between',
     marginHorizontal:20,
     alignItems:'center',
-    // borderWidth:1,
-    // borderColor:'grey',
     marginVertical:5,
     borderRadius:5
   },

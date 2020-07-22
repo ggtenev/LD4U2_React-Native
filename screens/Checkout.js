@@ -1,3 +1,5 @@
+//CHECKOUT SCREEN
+
 import React, { Component } from "react";
 import {
   StyleSheet,
@@ -15,7 +17,7 @@ import {
 import DateTimePicker from "@react-native-community/datetimepicker";
 
 export default class Checkout extends Component {
-  //Component state
+  //COMPONENT STATE
   state = {
     sw: false,
     year: "",
@@ -27,9 +29,10 @@ export default class Checkout extends Component {
     date: new Date(1598051730000),
   };
 
-  //Managing state for the Switch component
+  //MANAGING STATE FOR THE SWITCH
   toggleSwitch = () => this.setState({ sw: !this.state.sw });
 
+  //HANDLING EXPIRY DATE
   onChange = (event, selectedDate) => {
     const currentDate = selectedDate || date;
     this.setState({ show: Platform.OS === "ios" });
@@ -71,7 +74,7 @@ export default class Checkout extends Component {
             <Text>Expiry Date </Text>
             
 
-           
+           {/* PICKING THE EXPIRY DATE OF THE CARD */}
             <Picker
               selectedValue={this.state.year}
               style={s.individualPicker}
@@ -87,7 +90,7 @@ export default class Checkout extends Component {
               <Picker.Item label='2025' value='2025' />
             </Picker>
 
-        
+              
             <Picker
               selectedValue={this.state.month}
               style={s.individualPicker}
@@ -109,6 +112,8 @@ export default class Checkout extends Component {
               <Picker.Item label='December' value='December' />
             </Picker>
           </View>
+
+          {/* CVV INPUT */}
           <View style={s.cvvContainer}>
             <Text>CVV</Text>
             <TextInput
@@ -119,6 +124,8 @@ export default class Checkout extends Component {
               maxLength={3}
             />
           </View>
+
+          {/* CARDHOLDER NAME */}
           <View style={s.pickerContainer}>
             <Text>Cardholder</Text>
             <TextInput
@@ -131,6 +138,8 @@ export default class Checkout extends Component {
         <View>
           <Text style={s.errorMessage}>{this.state.errorMessage}</Text>
         </View>
+
+        {/* SUBSCRIPTION SWITCH */}
         <View style={s.subscription}>
           <Switch
             // style={{ transform: [{ scaleX: 1.4 }, { scaleY: 1.4 }] }}
@@ -148,8 +157,10 @@ export default class Checkout extends Component {
           </View>
         </View>
 
+              {/* FINALIZE ORDER BUTTON */}
         <View style={s.btn}>
           <Button
+          // CHECKING IF THE USER HAS PROVIDED ALL THE INFORMATION NEEDED
             disabled={
               !this.state.cardNumber.length ||
               !this.state.cardholderName ||
@@ -157,6 +168,8 @@ export default class Checkout extends Component {
             }
             title='Finalize Order'
             color='green'
+
+            // VERIFYING THE DETAILS
             onPress={() => {
               if (
                 this.state.cardNumber.length !== 16 ||
@@ -165,6 +178,7 @@ export default class Checkout extends Component {
                 this.setState({ errorMessage: "Please enter valid details" });
                 return;
               }
+              // IF ALL IS GOOD THE USER IS TAKES TO THE CONFIRMATION SCREEN
               makeOrder();
               this.props.navigation.navigate("Confirmation");
             }}
@@ -175,6 +189,8 @@ export default class Checkout extends Component {
     );
   }
 }
+
+//STYLES FOR THE SCREEN
 
 const s = StyleSheet.create({
   btn: {

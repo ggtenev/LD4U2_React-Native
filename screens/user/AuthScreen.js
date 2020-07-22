@@ -1,3 +1,5 @@
+//AUTHENTICATION SCREEN
+
 import React, { useState, useEffect } from "react";
 import { LinearGradient } from "expo-linear-gradient";
 import { useDispatch } from "react-redux";
@@ -5,6 +7,7 @@ import Colors from "../../constants/colors";
 
 import * as authActions from "../../store/actions/auth";
 
+//IMPORTING ALL REACT NATIVE COMPONENTS FOR THE SCREEN
 import {
   View,
   Image,
@@ -20,6 +23,8 @@ import {
 
 
 export default function AuthScreen({ navigation }) {
+
+  //STATE OF THE AUTHENTICATION FLOW
   const [loginMode, setLoginMode] = useState(true);
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
@@ -30,13 +35,13 @@ export default function AuthScreen({ navigation }) {
   const dispatch = useDispatch();
 
  
-  //Sign in method
+  //SIGN IN METHOD
   const signIn = async () => {
     setIsLoading(true);
     try {
       await dispatch(authActions.signIn(email, password));
       navigation.navigate("Onboarding");
-
+      //ERROR HANDLING
     } catch (err) {
       setError(err.message);
       console.log(error);
@@ -44,7 +49,7 @@ export default function AuthScreen({ navigation }) {
     }
   };
 
-  //Sign up method
+  //SIGN UP METHOD
   const signUp = async () => {
     setIsLoading(true);
     if(!firstName && !lastName) {
@@ -53,10 +58,12 @@ export default function AuthScreen({ navigation }) {
       return
     }
     try {
+      //DISPATCHING SIGNUP ACTION TO FIREBASE
       await dispatch(authActions.signup(email, password));
       setEmail("");
       setPassword("");
       navigation.navigate("Onboarding");
+      //CHECK IF THE SIGNUP WAS SUCCESSFUL AND FETCHING ERRORS
     } catch (err) {
       setError(err.message);
       console.log(err);
@@ -64,7 +71,7 @@ export default function AuthScreen({ navigation }) {
     }
   };
 
-  //Loading spinner while sending request to the server
+  //LOADING SPINNER WHILE SENDING REQUEST TO THE SERVER
   if (isLoading) {
     return (
       <View style={styles.activityIndicator}>
@@ -73,7 +80,7 @@ export default function AuthScreen({ navigation }) {
     );
   }
 
-  //Returning sign in / sign up conditionally based on user's choice
+  //RETURNING SIGN IN / SIGN UP OPTION CONDITIONALLY BASED ON USER'S CHOICE
   return loginMode ? (
     <KeyboardAvoidingView
       style={styles.screen}
@@ -101,7 +108,7 @@ export default function AuthScreen({ navigation }) {
           />
         </View>
         <View>
-          {/* Password input field */}
+          {/* PASSWORD INPUT FIELD */}
           <TextInput
             style={styles.inputFiled}
             placeholder='Password'
@@ -111,7 +118,7 @@ export default function AuthScreen({ navigation }) {
             value={password}
           />
         </View>
-         {/* Display error message if the user has not provided info in the input fields */}
+         {/* DISPLAY ERROR IF THE USER HASN'T PROVIDED THE INPUT */}
         <View style={{ alignItems: "center" }}>
           <Text style={{ color: "red" }}>{error}</Text>
         </View>
@@ -126,6 +133,8 @@ export default function AuthScreen({ navigation }) {
               onPress={signIn}
             />
           </View>
+
+          {/* ASKING THE USER IF NO ACCOUNT YET */}
           <View style={{ alignItems: "center", marginTop: 5 }}>
             <Text style={{ color: "grey" }}>No account yet?</Text>
           </View>
@@ -220,6 +229,8 @@ export default function AuthScreen({ navigation }) {
               email
               autoCapitalize='none'
               required
+
+              //SWITCH BACK TO LOGIN MODE
               onPress={() => setLoginMode(true) }
             />
           </View>

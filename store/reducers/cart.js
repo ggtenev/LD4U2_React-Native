@@ -1,12 +1,16 @@
+//CART REDUCER
+
 import { ADD_TO_CART, REMOVE_FROM_CART } from "../actions/cart";
 import CartItem from "../../model/cart-item";
 import { ADD_ORDER } from "../actions/orders";
 
+//SETTING INITIAL STATE
 const initState = {
   items: {},
   totalAmount: 0,
 };
 
+//CART REDUCER
 export default (state = initState, action) => {
   switch (action.type) {
     case ADD_TO_CART:
@@ -30,7 +34,7 @@ export default (state = initState, action) => {
         };
       } else {
 
-        //New item
+        //ADDING NEW ITEM
         const newCartItem = new CartItem(
           1,
           productPrice,
@@ -43,12 +47,14 @@ export default (state = initState, action) => {
           totalAmount: state.totalAmount + productPrice,
         };
       }
+
+      //REMOVE AN ITEM FROM CART
     case REMOVE_FROM_CART:
       const pid = action.id;
       const currentQty = state.items[pid].quantity;
       if (currentQty > 1) {
 
-        //need to reduce QTY
+        //REDUCE THE QTY OF A PRODUCT
         const updatedCartItem = new CartItem(
           state.items[pid].quantity - 1,
           state.items[pid].productPrice,

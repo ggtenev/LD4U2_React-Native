@@ -1,3 +1,5 @@
+// ORDER CONFIRMATION SCREEN 
+
 import React from "react";
 import { View, Text, Image, StyleSheet, Button } from "react-native";
 
@@ -18,6 +20,8 @@ export default function Confirmation({ navigation }) {
       >
         Your order was placed !
       </Text>
+
+      {/* ORDER NUMBER */}
       <Text
         style={{
           textAlign: "center",
@@ -39,6 +43,8 @@ export default function Confirmation({ navigation }) {
       >
         {Math.floor(Math.random() * 10000000)}
       </Text>
+
+      {/* NAVIGATION AWAY AFTER THE ORDER WAS CONFIRMED */}
       <View style={styles.btn}>
         <Button
           title='Continue Shopping'
@@ -50,6 +56,7 @@ export default function Confirmation({ navigation }) {
   );
 }
 
+//STYLES
 const styles = StyleSheet.create({
   container: {
     flex: 1,

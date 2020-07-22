@@ -1,3 +1,4 @@
+//sHOP COMPONENT FOR DISPLAYING THE SHOPS FETCHED FROM THE GOOGLE MAPS API
 
 import React from 'react';
 import { View,Image, StyleSheet,Button, Text, TouchableOpacity } from 'react-native';
@@ -5,6 +6,8 @@ import { View,Image, StyleSheet,Button, Text, TouchableOpacity } from 'react-nat
 export default function Shop({img, title, description, navigation}) {
   return (
     <View style={styles.container}>
+
+      {/* VISITING A SPECIFIC STORE */}
       <TouchableOpacity onPress={() => navigation.navigate('ProductsOverview')}>
       <Image style={styles.img} source={(img)} />
       <Text style={styles.title}>{title}</Text>

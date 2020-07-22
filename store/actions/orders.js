@@ -1,3 +1,5 @@
+
+//ACTION CONSTANTS
 export const ADD_ORDER = "ADD_ORDER";
 export const SET_ORDERS = "SET_ORDERS";
 import Order from "../../model/order";
@@ -29,6 +31,8 @@ export const fetchOrders = () => {
         )
       );
     }
+
+    //DISPATCHING TE ACTION TO THE REDUCER
     dispatch({ type: SET_ORDERS, orders: loadedOrders });
   };
 };
@@ -39,7 +43,7 @@ export const addOrder = (cartItems, totalAmount) => {
     const token = getState().auth.token;
     const userId = getState().auth.userId;
 
-    //async code DB communication
+    //ASYNC POSTING THE ORDER TO THE DB
     try {
       const response = await fetch(
         `https://ld4u-860ba.firebaseio.com/orders/${userId}.json?auth=${token}`,
@@ -55,15 +59,20 @@ export const addOrder = (cartItems, totalAmount) => {
         }
       );
 
+      //CHECKING THE RESPONSE
       if (!response.ok) {
         throw new Error("Something went wrong");
       }
 
       const resData = await response.json();
+
+      //IF RESPONSE IS OK DISPATCHING THE ACTION
       dispatch({
         type: ADD_ORDER,
         orderData: { items: cartItems, totalAmount, id: resData.name },
       });
+
+      //HANDLING ERRORS
     } catch (err) {
       console.log(err);
     }
