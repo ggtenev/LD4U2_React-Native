@@ -27,6 +27,7 @@ export default class Checkout extends Component {
     cardholderName: "",
     errorMessage: "",
     date: new Date(1598051730000),
+    address:''
   };
 
   //MANAGING STATE FOR THE SWITCH
@@ -134,6 +135,14 @@ export default class Checkout extends Component {
               onChangeText={(t) => this.setState({ cardholderName: t })}
             />
           </View>
+          <View style={s.pickerContainer}>
+            <Text>Address</Text>
+            <TextInput
+              placeholder={Platform.OS === "android" ? "  123 Main Str" : ""}
+              style={s.cardholderInput}
+              onChangeText={(t) => this.setState({ address: t })}
+            />
+          </View>
         </View>
         <View>
           <Text style={s.errorMessage}>{this.state.errorMessage}</Text>
@@ -237,7 +246,7 @@ const s = StyleSheet.create({
     flex: 1,
     // flexDirection: "column",
     backgroundColor: "#F5F5F5",
-    marginTop: 40,
+    marginTop: 10,
     alignItems: "center",
     padding:10
   },
