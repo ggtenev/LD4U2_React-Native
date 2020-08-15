@@ -27,7 +27,8 @@ export default class Checkout extends Component {
     cardholderName: "",
     errorMessage: "",
     date: new Date(1598051730000),
-    address:''
+    address:'',
+    postCode:''
   };
 
   //MANAGING STATE FOR THE SWITCH
@@ -143,6 +144,14 @@ export default class Checkout extends Component {
               onChangeText={(t) => this.setState({ address: t })}
             />
           </View>
+          <View style={s.pickerContainer}>
+            <Text>Post Code</Text>
+            <TextInput
+              placeholder={Platform.OS === "android" ? "  LR4 7FF" : ""}
+              style={s.cardholderInput}
+              onChangeText={(t) => this.setState({ postCode: t })}
+            />
+          </View>
         </View>
         <View>
           <Text style={s.errorMessage}>{this.state.errorMessage}</Text>
@@ -173,9 +182,11 @@ export default class Checkout extends Component {
             disabled={
               !this.state.cardNumber.length ||
               !this.state.cardholderName ||
-              !this.state.cvv
+              !this.state.cvv ||
+              !this.state.postCode ||
+              !this.state.address
             }
-            title='Finalize Order'
+            title='Finalise Order'
             color='green'
 
             // VERIFYING THE DETAILS
@@ -278,12 +289,13 @@ const s = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    marginVertical: 10,
+    marginVertical: 3,
   },
   cvvContainer: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
+    marginVertical: 3,
   },
   cardholderInput: {
     fontSize: 16,
@@ -292,6 +304,7 @@ const s = StyleSheet.create({
     borderColor: "grey",
     borderWidth: 1,
     width: "70%",
+    
   },
   paymentDetails: {
     textAlign: "center",

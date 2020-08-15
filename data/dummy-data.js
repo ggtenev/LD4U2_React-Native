@@ -16,7 +16,7 @@ const PRODUCTS = [
     'p2',
     'u1',
     'Eggs',
-    'https://media.treehugger.com/assets/images/2018/04/white_eggs_in_carton.jpg.860x0_q70_crop-scale.jpg',
+    'https://d.ibtimes.co.uk/en/full/1563431/eggs-carton.jpg',
     'Fits your red shirt perfectly. To stand on. Not to wear it.',
     2.99
   ),
